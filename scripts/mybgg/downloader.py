@@ -43,7 +43,7 @@ class Downloader():
             )
 
         # Dummy game for linking extra promos and accessories
-        collection_data.append(_create_blank_collection(EXTRA_EXPANSIONS_GAME_ID, "ZZZ: Expansions without Game (A-I)"))
+        # collection_data.append(_create_blank_collection(EXTRA_EXPANSIONS_GAME_ID, "ZZZ: Expansions without Game (A-I)"))
 
         params = {"subtype": "boardgameaccessory", "own": 1}
         accessory_collection = self.client.collection(user_name=user_name, **params)
@@ -103,8 +103,8 @@ class Downloader():
                     elif id in expansion_data_by_id:
                         expansion_data_by_id[id]["accessories_collection"].append(accessory_data)
                         own_game = True
-            if not own_game:
-                game_data_by_id[EXTRA_EXPANSIONS_GAME_ID]["accessories_collection"].append(accessory_data)
+            # if not own_game:
+            #     game_data_by_id[EXTRA_EXPANSIONS_GAME_ID]["accessories_collection"].append(accessory_data)
 
         for expansion_data in expansion_data_by_id.values():
             own_base_game = False
@@ -119,12 +119,12 @@ class Downloader():
                             game_data_by_id[id]["accessories_collection"].extend(expansion_data_by_id[expansion_data["id"]]["accessories_collection"])
                     elif id in expansion_data_by_id:
                         own_base_game = True
-            if not own_base_game:
-                id = EXTRA_EXPANSIONS_GAME_ID
-                expansion_data["suggested_numplayers"] = []
-                game_data_by_id[id]["expansions_collection"].append(expansion_data)
-                game_data_by_id[id]["expansions_collection"].extend(expansion_data_by_id[expansion_data["id"]]["expansions_collection"])
-                game_data_by_id[id]["accessories_collection"].extend(expansion_data_by_id[expansion_data["id"]]["accessories_collection"])
+            # if not own_base_game:
+            #     id = EXTRA_EXPANSIONS_GAME_ID
+            #     expansion_data["suggested_numplayers"] = []
+            #     game_data_by_id[id]["expansions_collection"].append(expansion_data)
+            #     game_data_by_id[id]["expansions_collection"].extend(expansion_data_by_id[expansion_data["id"]]["expansions_collection"])
+            #     game_data_by_id[id]["accessories_collection"].extend(expansion_data_by_id[expansion_data["id"]]["accessories_collection"])
 
 
         games_collection = list(filter(lambda x: x["id"] in game_data_by_id, collection_by_id.values()))
