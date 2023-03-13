@@ -430,6 +430,7 @@ class BGGClient:
                             alias="suggested_playerages",
                             hooks=xml.Hooks(after_parse=suggested_playerage),
                         ),
+                        xml.string("minage", attribute="value", alias="min_age"),
                     ],
                     required=False,
                     alias="items",
